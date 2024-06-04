@@ -2,8 +2,8 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<OutputType>Library</OutputType>
-		<RootNamespace>NINA.NinaPegasusPWMFlat</RootNamespace>
-		<AssemblyName>NINA.NinaPegasusPWMFlat</AssemblyName>
+		<RootNamespace>NINA.NinaPegasusPWMFlatDevice</RootNamespace>
+		<AssemblyName>NINA.NinaPegasusPWMFlatDevice</AssemblyName>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<UseWPF>true</UseWPF>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>

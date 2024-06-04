@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NINA.NinaPegasusPWMFlat.Properties {
+namespace NINA.NinaPegasusPWMFlatDevice.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace NINA.NinaPegasusPWMFlat.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NINA.NinaPegasusPWMFlat.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NINA.NinaPegasusPWMFlatDevice.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
