@@ -1,25 +1,19 @@
-﻿using NINA.NinaPegasusPWMFlat.Properties;
-using NINA.Core.Model;
-using NINA.Core.Utility;
-using NINA.Image.ImageData;
+﻿using NINA.Core.Utility;
+using NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers;
 using NINA.Plugin;
 using NINA.Plugin.Interfaces;
 using NINA.Profile;
 using NINA.Profile.Interfaces;
-using NINA.WPF.Base.Interfaces.Mediator;
 using NINA.WPF.Base.Interfaces.ViewModel;
+using Refit;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using Settings = NINA.NinaPegasusPWMFlat.Properties.Settings;
-using NINA.Core.Utility.WindowService;
+using Settings = NINA.PegasusPWMFlatDevice.Properties.Settings;
 
-namespace NINA.NinaPegasusPWMFlat {
+namespace NINA.PegasusPWMFlatDevice {
 
     /// <summary>
     /// This class exports the IPluginManifest interface and will be used for the general plugin information and options
@@ -29,12 +23,12 @@ namespace NINA.NinaPegasusPWMFlat {
     /// The user interface for the settings will be defined by a DataTemplate with the key having the naming convention "NinaPegasusFlat_Options" where NinaPegasusFlat corresponds to the AssemblyTitle - In this template example it is found in the Options.xaml
     /// </summary>
     [Export(typeof(IPluginManifest))]
-    public class NinaPegasusPWMFlat : PluginBase, INotifyPropertyChanged {
+    public class PegasusPWMFlatDevice : PluginBase, INotifyPropertyChanged {
         private readonly IPluginOptionsAccessor pluginSettings;
         private readonly IProfileService profileService;
 
         [ImportingConstructor]
-        public NinaPegasusPWMFlat(IProfileService profileService, IOptionsVM options, IWindowServiceFactory windowServiceFactory) {
+        public PegasusPWMFlatDevice(IProfileService profileService, IOptionsVM options) {
             if (Settings.Default.UpdateSettings) {
                 Settings.Default.Upgrade();
                 Settings.Default.UpdateSettings = false;
@@ -42,10 +36,29 @@ namespace NINA.NinaPegasusPWMFlat {
             }
 
             // This helper class can be used to store plugin settings that are dependent on the current profile
-            this.pluginSettings = new PluginOptionsAccessor(profileService, Guid.Parse(this.Identifier));
+            pluginSettings = new PluginOptionsAccessor(profileService, Guid.Parse(Identifier));
             this.profileService = profileService;
+
             // React on a changed profile
+            InitializeClient(UnityUrl);
             profileService.ProfileChanged += ProfileService_ProfileChanged;
+        }
+
+        public static Lazy<IPegasusAstro> pegasusClient;
+
+        public void InitializeClient(string baseUrl) {
+            pegasusClient = new Lazy<IPegasusAstro>(() => RestService.For<IPegasusAstro>(baseUrl));
+        }
+
+        public string UnityUrl {
+            get {
+                return pluginSettings.GetValueString("UnityUrl", Settings.Default.DefaultUnityUrl);
+            }
+            set {
+                pluginSettings.SetValueString("UnityUrl", value);
+                InitializeClient(value);
+                RaisePropertyChanged();
+            }
         }
 
         public override Task Teardown() {
@@ -56,35 +69,12 @@ namespace NINA.NinaPegasusPWMFlat {
         }
 
         private void ProfileService_ProfileChanged(object sender, EventArgs e) {
-            // Rase the event that this profile specific value has been changed due to the profile switch
-            RaisePropertyChanged(nameof(ProfileSpecificNotificationMessage));
-        }
-
-        public string DefaultNotificationMessage {
-            get {
-                return Settings.Default.DefaultNotificationMessage;
-            }
-            set {
-                Settings.Default.DefaultNotificationMessage = value;
-                CoreUtil.SaveSettings(Settings.Default);
-                RaisePropertyChanged();
-            }
-        }
-
-        public string ProfileSpecificNotificationMessage {
-            get {
-                return pluginSettings.GetValueString(nameof(ProfileSpecificNotificationMessage), string.Empty);
-            }
-            set {
-                pluginSettings.SetValueString(nameof(ProfileSpecificNotificationMessage), value);
-                RaisePropertyChanged();
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = null) {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

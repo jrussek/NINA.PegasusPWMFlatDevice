@@ -9,8 +9,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NINA.NinaPegasusPWMFlat.NinaPegasusPWMFlatDrivers
-{
+namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.0.0")]
     public partial interface IPegasusAstro
     {
@@ -6694,8 +6693,8 @@ namespace NINA.NinaPegasusPWMFlat.NinaPegasusPWMFlatDrivers
 #pragma warning disable 8625 // Disable "CS8625 Cannot convert null literal to non-nullable reference type"
 #pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
 
-namespace NINA.NinaPegasusPWMFlat.NinaPegasusPWMFlatDrivers
-{
+namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers 
+    {
     using System = global::System;
 
     

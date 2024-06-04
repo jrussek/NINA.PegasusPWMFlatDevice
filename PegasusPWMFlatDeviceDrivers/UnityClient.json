@@ -38416,7 +38416,7 @@
           },
           "channels": {
             "type": "array",
-            "items": { },
+            "items": {},
             "nullable": true
           }
         },

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition;
 using System.Windows;
 
-namespace NINA.NinaPegasusPWMFlat {
+namespace NINA.PegasusPWMFlatDevice {
 
     [Export(typeof(ResourceDictionary))]
-    partial class Options : ResourceDictionary {
+    public partial class Options : ResourceDictionary {
 
         public Options() {
             InitializeComponent();

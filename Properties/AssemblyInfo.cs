@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // [MANDATORY] The following GUID is used as a unique identifier of the plugin. Generate a fresh one for your plugin!
@@ -11,20 +10,20 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.1")]
 
 // [MANDATORY] The name of your plugin
-[assembly: AssemblyTitle("nina.pegasus_flat")]
+[assembly: AssemblyTitle("Pegasus Powerbox PWM Flatdevice")]
 // [MANDATORY] A short description of your plugin
-[assembly: AssemblyDescription("Control a pegasus powerbox pwm output as a flat device")]
+[assembly: AssemblyDescription("Treat a Pegasus powerbox PWM port as Flatpanel")]
 
 // The following attributes are not required for the plugin per se, but are required by the official manifest meta data
 
 // Your name
 [assembly: AssemblyCompany("johannes russek")]
 // The product name that this plugin is part of
-[assembly: AssemblyProduct("nina.pegasus_flat")]
+[assembly: AssemblyProduct("NINA.PegasusPWMFlatDevice")]
 [assembly: AssemblyCopyright("Copyright © 2024 johannes russek")]
 
 // The minimum Version of N.I.N.A. that this plugin is compatible with
-[assembly: AssemblyMetadata("MinimumApplicationVersion", "2.0.0.9001")]
+[assembly: AssemblyMetadata("MinimumApplicationVersion", "3.0.0.9001")]
 
 // The license your plugin code is using
 [assembly: AssemblyMetadata("License", "MPL-2.0")]
@@ -51,7 +50,7 @@ using System.Runtime.InteropServices;
 //[Optional] An additional url to an example example screenshot of your plugin in action
 [assembly: AssemblyMetadata("AltScreenshotURL", "")]
 //[Optional] An in-depth description of your plugin
-[assembly: AssemblyMetadata("LongDescription", @"")]
+[assembly: AssemblyMetadata("LongDescription", @"This Plugin provides a flat device per UPBv3 using one of the PWM controllable ports")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
