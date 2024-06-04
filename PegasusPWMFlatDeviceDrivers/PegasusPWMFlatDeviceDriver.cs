@@ -15,7 +15,7 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
         private readonly PWMPortMessage _port;
 
         public PegasusPWMFlatDeviceDriver(IProfileService profileService, PWMPortMessage port, UPBv3 powerbox) {
-            Logger.Error($"new device created for {powerbox} and port {port}");
+            Logger.Debug($"new device created for {powerbox} and port {port}");
             _profileService = profileService;
             _powerbox = powerbox;
             _port = port;
@@ -34,7 +34,7 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
 
         public string Description => "Configure a flat device from a pegasus powerbox PWM port";
 
-        public string DriverInfo { get => _powerbox.device.Firmware + " " + _powerbox.device.Revision; }
+        public string DriverInfo { get => _powerbox.device.DeviceID + " " + _powerbox.device.Firmware + " " + _powerbox.device.Revision; }
 
         public string DriverVersion { get => "1.0.1"; }
 
@@ -91,17 +91,29 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
 
         public int Brightness {
             get {
+                if (!_lightOn) {
+                    _level = 0;
+                    return 0;
+                }
                 return _level;
             }
             set {
                 if (_level != value) {
-                    try {
-                        UpdateLevel(value);
-                    } catch (Exception e) {
-                        Logger.Error($"Error setting port {_port.Name} level: {e.Message}");
-                        Connected = false;
+                    if (value == 0) {
+                        LightOn = false;
+                        _level = 0;
+                        RaisePropertyChanged("LightOn");
+                    } else {
+                        try {
+                            UpdateLevel(value);
+                            LightOn = true;
+                            RaisePropertyChanged("LightOn");
+                            RaisePropertyChanged();
+                        } catch (Exception e) {
+                            Logger.Error($"Error setting port {_port.Name} level: {e.Message}");
+                            Connected = false;
+                        }
                     }
-                    RaisePropertyChanged();
                 }
             }
         }
