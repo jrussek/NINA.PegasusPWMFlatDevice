@@ -26,12 +26,22 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
         private async Task<List<DeviceInfo>> ListUPBv3Device(CancellationToken token) {
             var resp = await unityClient.Value.ServerDeviceManagerConnected(token);
             var devices = new List<DeviceInfo>();
-            if (resp.Code == RJesCode._200 && resp.Message == "success") {
+            if (resp.Code == RJesCode._200) {
+                Logger.Error($"Connected to ServerDeviceManager, {resp.Message} devices");
+                Logger.Error($"Returned data is {resp.Data}");
                 foreach (var item in resp.Data) {
                     if (item.Name == "UPBv3") {
-                        devices.Add(item);
+                        var start_response = await unityClient.Value.DriverUPBv3Start(item.UniqueKey.ToString(), token);
+                        if (start_response.Code == RJesCode._200) {
+                            devices.Add(item);
+                        } else {
+                            Logger.Error($"Error starting UPBv3 device: {start_response.Message}");
+                        }
                     }
                 }
+            } else {
+                Logger.Error($"Error listing UPBv3 devices: {resp.Message}");
+                Logger.Error($"Returned data is {resp.Data}");
             }
             return devices;
         }

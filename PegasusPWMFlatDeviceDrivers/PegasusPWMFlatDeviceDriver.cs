@@ -15,26 +15,28 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
         private readonly PWMPortMessage _port;
 
         public PegasusPWMFlatDeviceDriver(IProfileService profileService, PWMPortMessage port, UPBv3 powerbox) {
-            Logger.Error("new device created");
+            Logger.Error($"new device created for {powerbox} and port {port}");
             _profileService = profileService;
             _powerbox = powerbox;
             _port = port;
         }
 
-        public string Id { get => _powerbox.device.DeviceID; }
+        public string Id { get => _powerbox.device.UniqueKey.ToString(); }
 
-        public string Name { get => _powerbox.device.Name; }
+        public string Name => $"{_powerbox.device.FullName} port {_port.Name}";
+
+        /* contains the port number the flat panel is connected to */
+        private int PortNumber { get => _port.PortNumber; set { } }
+
+        public string DisplayName => $"{_powerbox.device.FullName} - {_port.Name} (port {PortNumber})";
 
         public string Category => "Pegasus Astro";
 
         public string Description => "Configure a flat device from a pegasus powerbox PWM port";
 
-        public string DriverInfo { get => _powerbox.device.Firmware; }
+        public string DriverInfo { get => _powerbox.device.Firmware + " " + _powerbox.device.Revision; }
 
-        public string DriverVersion { get => _powerbox.device.Revision; }
-
-        /* contains the port number the flat panel is connected to */
-        private int PortNumber { get => _port.PortNumber; set { } }
+        public string DriverVersion { get => "1.0.1"; }
 
         public bool Connected { get; private set; }
 
@@ -42,16 +44,24 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
 
         public bool HasSetupDialog => false;
 
-        CoverState IFlatDevice.CoverState => CoverState.NeitherOpenNorClosed;
+        public CoverState CoverState => CoverState.NeitherOpenNorClosed;
 
-        int IFlatDevice.MaxBrightness => 100;
+        public int MaxBrightness => 100;
 
-        int IFlatDevice.MinBrightness => 5;
+        public int MinBrightness => 5;
+
+        public string PortName {
+            get => _port.Name; set { }
+        }
+
+        public bool SupportsOpenClose => false;
+
+        public bool SupportsOnOff => true;
 
         private bool _lightOn;
         private int _level;
 
-        bool IFlatDevice.LightOn {
+        public bool LightOn {
             get {
                 return _lightOn;
             }
@@ -63,8 +73,9 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
                         Logger.Error($"Error setting port {_port.Name} on/off: {e.Message}");
                         Connected = false;
                     }
-
-                    RaisePropertyChanged();
+                    _level = 100;
+                    RaisePropertyChanged("Brightness");
+                    RaisePropertyChanged("LightOn");
                 }
             }
         }
@@ -78,7 +89,7 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
             }
         }
 
-        int IFlatDevice.Brightness {
+        public int Brightness {
             get {
                 return _level;
             }
@@ -103,16 +114,6 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
                 Logger.Error("Setting port level was canceled");
             }
         }
-
-        string IFlatDevice.PortName {
-            get => _port.Name; set { }
-        }
-
-        bool IFlatDevice.SupportsOpenClose => false;
-
-        bool IFlatDevice.SupportsOnOff => true;
-
-        string IDevice.DisplayName => $"{_powerbox.device.FullName} port {_port.Name}";
 
         public async Task<bool> Connect(CancellationToken token) {
             Connected = await _powerbox.Connect(token);
