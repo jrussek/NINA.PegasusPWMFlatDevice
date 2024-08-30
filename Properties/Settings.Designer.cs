@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NINA.NinaPegasusPWMFlatDevice.Properties {
+namespace NINA.PegasusPWMFlatDevice.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
