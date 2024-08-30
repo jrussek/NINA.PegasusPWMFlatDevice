@@ -10,13 +10,11 @@ using System.Threading.Tasks;
 namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
 
     public class PegasusPWMFlatDeviceDriver : BaseINPC, IDevice, IFlatDevice {
-        private readonly IProfileService _profileService;
         private readonly UPBv3 _powerbox;
         private readonly PWMPortMessage _port;
 
         public PegasusPWMFlatDeviceDriver(IProfileService profileService, PWMPortMessage port, UPBv3 powerbox) {
             Logger.Debug($"new device created for {powerbox} and port {port}");
-            _profileService = profileService;
             _powerbox = powerbox;
             _port = port;
         }
