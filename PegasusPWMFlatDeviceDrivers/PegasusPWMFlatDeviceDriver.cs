@@ -133,6 +133,7 @@ namespace NINA.PegasusPWMFlatDevice.PegasusPWMFlatDeviceDrivers {
                     _lightOn = _level > 0;
                 }
             } catch (Exception e) {
+                Logger.Debug("Error getting port level: " + e.Message);
                 Connected = false;
             }
 

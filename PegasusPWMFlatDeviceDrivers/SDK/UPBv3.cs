@@ -65,7 +65,7 @@ public class UPBv3(Lazy<IPegasusAstro> lazyUnityClient, DeviceInfo device) {
             if (resp.Code != RJesCode._200) {
                 throw new Exception($"Error setting PWM port level: {resp.Message}");
             } else {
-                Logger.Error($"Set PWM port {portnumber} to level {level}. Message: {resp.Message}");
+                Logger.Debug($"Set PWM port {portnumber} to level {level}. Message: {resp.Message}");
             }
         } catch (OperationCanceledException) {
             Logger.Error("SetBrightness Operation canceled");
@@ -84,7 +84,7 @@ public class UPBv3(Lazy<IPegasusAstro> lazyUnityClient, DeviceInfo device) {
             Logger.Error($"Error switching PWM port on/off: {response.Message}");
             throw new Exception($"Error switching PWM port: {response.Message}");
         } else {
-            Logger.Error($"Switched PWM port {portnumber} to state {state}. Message: {response.Message}");
+            Logger.Debug($"Switched PWM port {portnumber} to state {state}. Message: {response.Message}");
         }
     }
 }
