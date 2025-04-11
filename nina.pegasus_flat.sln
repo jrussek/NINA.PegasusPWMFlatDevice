@@ -4,10 +4,6 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nina.pegasus_flat", "nina.pegasus_flat.csproj", "{10BD00ED-0959-488D-8240-FA273CFC094F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NINA", "..\..\..\Documents\repositories\nina\NINA\NINA.csproj", "{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NINA.Equipment", "..\..\..\Documents\repositories\nina\NINA.Equipment\NINA.Equipment.csproj", "{DD80BD35-ABD7-408A-94F3-D487D1B163D3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,30 +26,6 @@ Global
 		{10BD00ED-0959-488D-8240-FA273CFC094F}.SignedRelease|Any CPU.Build.0 = Release|Any CPU
 		{10BD00ED-0959-488D-8240-FA273CFC094F}.SignedRelease|x64.ActiveCfg = Release|x64
 		{10BD00ED-0959-488D-8240-FA273CFC094F}.SignedRelease|x64.Build.0 = Release|x64
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.Debug|x64.Build.0 = Debug|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.Release|x64.ActiveCfg = Release|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.Release|x64.Build.0 = Release|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.SignedRelease|Any CPU.ActiveCfg = SignedRelease|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.SignedRelease|Any CPU.Build.0 = SignedRelease|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.SignedRelease|x64.ActiveCfg = SignedRelease|Any CPU
-		{CE6F2054-3222-45DD-B4CA-63A70F99DD7D}.SignedRelease|x64.Build.0 = SignedRelease|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.Debug|x64.Build.0 = Debug|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.Release|x64.ActiveCfg = Release|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.Release|x64.Build.0 = Release|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.SignedRelease|Any CPU.ActiveCfg = SignedRelease|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.SignedRelease|Any CPU.Build.0 = SignedRelease|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.SignedRelease|x64.ActiveCfg = SignedRelease|Any CPU
-		{DD80BD35-ABD7-408A-94F3-D487D1B163D3}.SignedRelease|x64.Build.0 = SignedRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
