@@ -17,7 +17,7 @@ env:
   # Adjust this to your plugin title
   PLUGIN_NAME: "nina.pegasus_flat"
 
-  PLUGIN_DLL_NAME: "NINA.NINAPegasusPWMFlatDevice.dll"
+  PLUGIN_DLL_NAME: "NINA.NinaPegasusPWMFlatDevice"
 
 jobs:
   build-and-release:
